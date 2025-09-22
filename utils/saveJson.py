@@ -3,8 +3,11 @@ import os
 
 def guardar_diccionario(datos, nombre_archivo):
     try:
+        with open(nombre_archivo,'r', encoding='utf-8') as lectura:
+            DatosDiccionario = json.load(lectura)
         with open(nombre_archivo, 'w', encoding='utf-8') as archivo:
-            json.dump(datos, archivo, ensure_ascii=False, indent=4)
+            DatosDiccionario.update(datos)
+            json.dump(DatosDiccionario, archivo, ensure_ascii=False, indent=4)
         print(f"Datos guardados exitosamente en {nombre_archivo}")
         return True
     except Exception as e:
